@@ -32,6 +32,7 @@ const closeBtn = document.getElementById("close-btn")
 const wrongSound = document.getElementById("wrong")
 const youFailedSound = document.getElementById("failed")
 const timeIsUpSound = document.getElementById("times-up")
+const enoughTime = document.getElementById("enough-time")
 const clickSound = document.getElementById("click")
 const correctSound = document.getElementById("correct")
 const backgroundMusic = document.getElementById("background-music")
@@ -158,7 +159,6 @@ function showMyScore() {
         score.setAttribute("id","myscore")
         score.innerHTML = "Score: "+ descendingOrder[i];
         if(i == 0) {
-
             score.innerHTML = "🥳🎉High Score: "+ descendingOrder[i]+"🥳🎉";
             score.style.background = "rgb(0, 255, 119)";
         }
@@ -196,9 +196,10 @@ function checkTrialsLeft() {
             failedMessage.style.display = "flex"
             intervalClear()
         }else {
-            if(!youFailedSound.paused || !timeIsUpSound.paused){
+            if(!(youFailedSound.paused || timeIsUpSound.paused)) {
                 youFailedSound.pause();
                 timeIsUpSound.pause()
+                timeIsUpSound.currentTime = 0;
                 youFailedSound.currentTime = 0;
             }
             youFailedSound.currentTime = 0;
@@ -216,13 +217,18 @@ function startTimer() {
     trial.style.display = "block"
     trialsLeft.innerText = "Trials left: " + trials
     if(time <=10){
-        if (!correctSound.paused) {
-            correctSound.pause()
-            correctSound.currentTime = "0"
+        if (!timeIsUpSound.paused) {
+            timeIsUpSound.pause()
+            timeIsUpSound.currentTime = "0"
         }
         timeIsUpSound.play()
     }
     if(time < 1) {
+        timeIsUpSound.pause()
+        timeIsUpSound.currentTime = "0"
+        enoughTime.pause()
+        enoughTime.currentTime = "0"
+        enoughTime.play();
         if(_score == 0) {
             timeIsUpMessage.style.display = "flex"
             intervalClear()
@@ -286,21 +292,25 @@ function generateQuestion(operation) {
         case "+":
             correctAnswer.innerText = randomNumberOne + randomNumberTwo
             break
-            case "-":
-                correctAnswer.innerText = randomNumberOne - randomNumberTwo
-                break
             case "X":
                 correctAnswer.innerText = randomNumberOne * randomNumberTwo
                 break
             case "/":
-                if(randomNumberOne > randomNumberTwo) {
-                    correctAnswer.innerText = Math.round((randomNumberOne / randomNumberTwo)*10)/10
+                if(randomNumberOne < randomNumberTwo) {
+                    correctAnswer.innerText = Math.round((randomNumberTwo / randomNumberOne)*10)/10
 
                 }else {
-                    correctAnswer.innerText = Math.round(randomNumberTwo / randomNumberOne)
-
+                    correctAnswer.innerText = Math.round(randomNumberOne / randomNumberTwo)
                 }
-                break
+                break;
+                case "-":
+                    if(randomNumberOne < randomNumberTwo) {
+                        correctAnswer.innerText = Math.round((randomNumberTwo - randomNumberOne)*10)/10
+    
+                    }else {
+                        correctAnswer.innerText = Math.round(randomNumberOne - randomNumberTwo)
+                    }
+                    break
     }
     randomAnswerOne.innerText =  Number(correctAnswer.innerText) + Number(3)
     randomAnswerTwo.innerText =  correctAnswer.innerText - 3
@@ -319,7 +329,7 @@ function generateQuestion(operation) {
             correctSound.pause(); 
             correctSound.currentTime = 0;
           }
-          correctSound.play();
+        correctSound.play();
         questionContainer.removeChild(question)
         answerContainer.removeChild(answers)
         generateQuestion(operation,numberLimit)
