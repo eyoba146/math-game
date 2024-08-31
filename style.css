@@ -1,0 +1,375 @@
+@font-face {
+    font-family: boys;
+    src: url(./font/SuperBoys-vmW67.ttf);
+}
+@font-face {
+    font-family: lucky;
+    src: url(./font/LuckiestGuy-Regular.ttf);
+}
+@font-face {
+    font-family: eyob;
+    src: url(./font/eyob.ttf);
+}
+* {
+    font-family: lucky;
+    box-sizing: border-box;
+}
+body {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-image: url(./background/bg.jpg);
+    background-attachment: fixed;
+
+}
+#container {
+    transition: .78s ease-out;
+    transform: scale(1);
+    width: 100%;
+    height: 100%;
+    background:rgba(183, 107, 242, 0.089)
+}
+#container #header {
+    font-family:boys;
+    width: 100%;
+    height: 120px;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white !important;
+    background: rgb(26, 150, 221);
+}
+#header #option-container {
+    display: flex;
+    margin-right: 20px;
+    width: fit-content;
+}
+#logo-container h1{
+    font-family: boys;
+    margin-left: 20px;
+    cursor: pointer;
+}
+#option-container p {
+    margin-right: 20px;
+    cursor: pointer;
+}
+#start-game {
+    position: absolute;
+    z-index: 10000;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-image: url(./background/bg.jpg);
+    background-position-y: center;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-items: center;
+    transition: .5s ease;
+}
+#start-game button {
+    all:unset;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 2px rgb(76, 76, 76);
+    font-size: 1.5rem;
+    border-radius: 14px;
+    background-color: rgb(0, 153, 255);
+    width: 200px;
+    height: 100px;
+}
+#container #main {
+    width: 100%;
+    display: flex;
+    height: calc(100% - 120px);
+    overflow: auto;
+}
+#main #question-container {
+    width:100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+}
+#main #my-score {
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    padding: 50px;
+    /* justify-content: center; */
+}
+#score-list #myscore {
+    display: none;
+    flex-direction: block;
+}
+#my-score #score-list {
+    width: 100%;
+    overflow: auto;
+    padding: 20px;
+    align-items:center;
+    justify-content: center;
+}
+#my-score #score-list div {
+    width: 100%;
+    background-color: #2980B9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    font-size: 26px;
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 1px 5px rgb(99, 99, 99) ;
+}
+
+#my-score #score-list div:nth-child(odd) {
+    background: #3498DB
+}
+#question-container #question {
+    display: flex;
+}
+#question-container #question p{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(123, 0, 255, 0.849);
+    margin-right: 10px;
+    /* color: white; */
+    border-radius: 5px;
+    font-size: 8rem;
+
+}
+#main #answer-container {
+    width: 150px;
+    height: 100%;
+    margin-left: auto;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgb(26, 150, 221);;
+}
+#answers {
+    text-align: center;
+}
+#answer-container #answers button {
+    width: 100px;
+    height: 100px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 15px black;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-weight: bolder;
+    font-size: 2rem;
+    color: white;
+    text-shadow: 1px 1px 5px rgb(95, 95, 95);
+}
+#answer-container #answers button:nth-child(1) {
+    background-color: rgba(61, 255, 152, 0.923);
+}
+#answer-container #answers button:nth-child(2) {
+    background-color: rgba(61, 206, 255, 0.754);
+}
+#answer-container #answers button:nth-child(3) {
+    background-color: #ffff28;
+
+}
+#main #trial {
+    height: fit-content;
+    width: 200px;
+    display: none;
+    padding: 10px;
+    font-size: 20px;
+    background: rgba(26, 150, 221, 0.245);
+    color: white;
+}
+#overlay-methods {
+    display: none;
+}
+#time-message, #failed-message{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display:none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    background-color: #00000074;
+}
+#difficulty {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display:none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    background-color: #00000074;
+}
+#main #trial p { 
+    font-family: eyob;
+    text-shadow: 1px 1px 2px gray;
+    font-weight: bolder;
+}
+#failed-message #message,#time-message #message,#difficulty #message{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 270px;
+    border-radius: 5px;
+    background-color: white;
+}
+#failed-message button,#time-message button,#difficulty button {
+    width: 300px;
+    margin-top: 10px;
+    height: 60px;
+    cursor: pointer;
+    border: none;
+    border-radius: 7px;
+    background-color: black;
+    color: white;
+    font-size: 28px;
+}
+#list-container #burger-btn {
+    display: none;
+}
+#list-container #close-btn {
+    display: none;
+}
+#difficulty select {
+    width: 300px;
+    height: 50px;
+    font-size: 18px;
+}
+
+@media only screen and (max-width:600px) {
+    body {
+        overflow: hidden;
+    }
+    #start-game{
+    background-size: auto 100%;
+    }
+    #list-container #burger-btn {
+        display: block;
+    }
+    #container #header {
+        height: 100px;
+        position:sticky;
+        z-index: 9000;
+    }
+    #logo-container h1  {
+        font-size:35px;
+    }
+    #list-container {
+        margin-left: auto;
+        user-select: none;
+    }
+    #command {
+        font-size: 1.5rem !important;
+    }
+    #overlay-methods {
+        position: absolute;
+        z-index: 80;
+        background-color: white     ;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        transform: scale(0);
+        transition: .25s ease-in;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+    }
+    #overlay-methods li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        width: 90%;
+        border-radius: 7px;
+        color: gray;
+        overflow-y: auto;
+        font-size: 1.5rem;
+        box-shadow: 0px 1px 10px rgb(238, 238, 238);
+        height: 95px;
+    }
+    #main #my-score { 
+        padding: 0;
+    }    
+    #list-container i {
+        font-size: 60px;
+    }
+    #option-container, #option-container p {
+        display: none;
+    }
+    #difficulty #message, #time-message #message, #failed-message #message {
+        width: 95%;
+        border-radius: 10px;
+    }
+    #question-container #question p{ 
+        font-size: 2.8rem;
+        width: 50px;
+        margin-bottom: 200px;
+    }
+    #container #main {
+        /* display: flex; */
+        flex-direction: column;
+    }
+    #main #trial {
+        height: 120px;
+        width: 100%;
+        /* display: flex; */
+        flex-direction: row;
+        padding: 0;
+    }
+    #main #trial p {
+        font-size: 1rem;
+        margin-left: 20px;
+        width: fit-content;
+    }
+    #main #answer-container {
+        height: 100px;
+        margin-left: 0;
+        width: 100%;
+        position: fixed;;
+        bottom: 0;
+    }
+    #answers {
+        display: flex;
+        padding: 10px;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+    #answer-container #answers button {
+        width: 100px;
+        margin-top: 20px;
+        height: 70px;
+    }
+    #my-score #score-list {
+        max-height: 625px;
+        padding: 5px;
+    }
+    #my-score #score-list div {
+        height: 70px;
+        font-size: 1.3rem;
+    }
+    #my-score #score-list div:first-child {
+        border-top-left-radius: 14px;
+        border-top-right-radius: 14px;
+    }
+    #my-score #score-list div:last-child {
+        border-bottom-left-radius: 14px;
+        border-bottom-right-radius: 14px;
+    }
+}

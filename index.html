@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="./bootstrap.css"> -->
+    <title>Mini Game</title>
+</head>
+<body>
+    <div id="start-game">
+        <img src="./background/logo.png" alt="" srcset=""><br><br>
+        <button  onclick="playAudio()">Start Game</button>
+    </div>
+    <div id="container">
+        <div id="difficulty">
+            <div id="message">
+                <h1>Choose Difficulty</h1>
+                <select id="select">
+                    <option value="">Choose Difficulty</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Hard">Hard</option>
+                </select>
+                <button id="save">save</button>
+            </div>
+        </div>
+        <audio  id="background-music"  loop>
+            <source src="./audio/background.mp3" type="audio/mpeg">
+          </audio>
+           
+          <audio preload='auto' id="wrong">
+            <source src="./audio/wrong.wav" type="audio/wav">
+          </audio>
+          <audio preload='auto' id="correct">
+            <source src="./audio/correct.wav" type="audio/wav">
+          </audio>
+          <audio preload='auto' id="click">
+            <source src="./audio/click.wav" type="audio/wav">
+          </audio>
+          <audio preload='auto' id="times-up">
+            <source src="./audio/time's up.wav" type="audio/wav">
+          </audio>
+          <audio preload='auto' id="failed">
+            <source src="./audio/failed.wav" type="audio/wav">
+          </audio>
+        <div id="time-message">
+            <div id="message">
+                <h1>🥴🥴Time's up 👀🥴</h1>
+                <button id="okayy">Okay</button>
+            </div>
+        </div>
+        <div id="failed-message">
+            <div id="message">
+                <h1>😭😫You Failed😩🥹</h1>
+                <button id="okay">Okay</button>
+            </div>
+        </div>
+        <div id="header">
+            <div id="logo-container">
+                <h1>Math Game</h1>
+            </div>
+            <div id="list-container">
+                <i id="burger-btn" class="bi bi-list"><img src="./background/burger.png" style="width: 70px;"alt="" srcset=""></i> 
+                <i id="close-btn" class="bi bi-x"><img src="./background/close.png" style="width: 70px;"alt="" srcset=""></i>
+            </div>
+            <div id="option-container">
+                <p id="Addition">Addition</p>
+                <p id="Subtraction">Subtraction</p>
+                <p id="Division">Division</p>
+                <p id="Multiplication">Multiplication</p>
+                <p id="Scores">My Scores</p>
+                <p id="settings">Difficulty</p>
+            </div>
+        </div>
+        <div id="main">
+            <div id="overlay-methods">
+                <li id="Addition-mobile">Addition</li>
+                <li id="Subtraction-mobile">Subtraction</li>
+                <li id="Division-mobile">Division</li>
+                <li id="Multiplication-mobile">Multiplication</li>
+                <li id="Scores-mobile">My Scores</li>
+                <li id="settings-mobile">Difficulty</li>
+            </div>
+            <div id="trial">
+                <p id="time">Time left:</p>
+                <p id="trials">Trials left:</p>
+                <p id="score">Score: 0</p>
+            </div>
+            <div id="my-score">
+                <h1>Your Score list</h1>
+                <div id="score-list"></div>
+            </div>
+            <div id="question-container">
+                <div id="question">
+                    <p id="command"style="width: 790px;font-size: 3rem;font-family:boys;text-align:center;">Welcome to the Math Game!<br> Please choose the operators to play</p>
+                </div>
+            </div>
+            <div id="answer-container">
+                <div id="answers">
+                    
+                </div>
+             
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
